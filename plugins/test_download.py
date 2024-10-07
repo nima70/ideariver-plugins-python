@@ -1,5 +1,5 @@
 import pytest
-from download import download_audio
+from plugins.download_audio_plugin.download import download_audio
 import os
 
 @pytest.fixture
