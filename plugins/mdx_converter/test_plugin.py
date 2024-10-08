@@ -21,15 +21,14 @@ def test_convert_to_mdx(plugin, transcript_text):
     """
     # Run the plugin with the transcript text
     input_data = {"transcript_text": transcript_text}
-    output_file = plugin.run(input_data)
+    mdx_content = plugin.run(input_data)
     
-    # Check that the MDX file is generated
-    assert output_file is not None, "No MDX file was generated."
-    assert output_file == "transcript.mdx", "The generated file should be 'transcript.mdx'."
-
-    # Check that the file has content
-    with open(output_file, "r") as mdx_file:
-        content = mdx_file.read()
+    # Check that the MDX content is generated
+    assert mdx_content is not None, "No MDX content was generated."
     
-    assert content, "The MDX file should contain generated content."
-    print("Generated MDX Content:", content)
+    # Check that the MDX content is a string and has proper formatting
+    assert isinstance(mdx_content, str), "MDX content should be a string."
+    assert "<h1>" in mdx_content or "##" in mdx_content, "MDX content should contain headings."
+    
+    # Print the generated MDX content for debugging
+    print("Generated MDX Content:", mdx_content)

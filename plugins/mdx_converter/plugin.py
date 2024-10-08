@@ -7,66 +7,57 @@ from ideariver_core import BasePlugin  # Assuming BasePlugin is part of idearive
 
 class ConvertToMDXPlugin(BasePlugin):
     """
-    Plugin to convert transcript text into MDX format using LangChain's GPT models.
+    Plugin that converts transcript text into MDX format using OpenAI's LLM.
     """
 
     def __init__(self):
-        self.llm = None
+        self.services = None
 
     def init(self, services):
         """
-        Initialize the plugin with the OpenAI LLM via LangChain.
+        Initialize the plugin with required services, such as OpenAI credentials.
         
         Args:
-            services (dict): Dictionary of services (e.g., logging, API keys).
+            services (dict): Dictionary of services (e.g., logging, configuration).
         """
-        # Load environment variables from the .env file to access sensitive data like API keys
+        self.services = services
+
+        # Load environment variables from the .env file if present
         load_dotenv()
 
-        # Retrieve OpenAI API key from environment variables
-        openai_api_key = os.getenv('OPENAI_API_KEY')
+        # Access OpenAI API key
+        self.openai_api_key = os.getenv('OPENAI_API_KEY')
 
-        # Initialize OpenAI model via LangChain
-        self.llm = ChatOpenAI(api_key=openai_api_key, model="gpt-3.5-turbo", temperature=0.7)
+        # Initialize LangChain's OpenAI model
+        self.llm = ChatOpenAI(api_key=self.openai_api_key, model="gpt-3.5-turbo")
+
+        # Define the prompt template for converting a transcript into MDX
+        self.prompt_template = ChatPromptTemplate.from_messages([
+            ("system", """You are an assistant that converts transcript text into MDX format. The MDX should have proper headings, bullet points, and JSX components where appropriate."""),
+            ("user", "{input}"),
+        ])
+
+        # Output parser to convert the response to a string
+        self.output_parser = StrOutputParser()
+
+        # Chain mechanism
+        self.chain = self.prompt_template | self.llm | self.output_parser
 
     def run(self, input_data):
         """
-        Convert the provided transcript text into MDX format.
+        Run the plugin to convert the transcript text into MDX format.
 
         Args:
-            input_data (dict): Dictionary containing 'transcript_text'.
+            input_data (dict): Dictionary with transcript text.
 
         Returns:
-            str: Path to the saved MDX file.
+            str: MDX formatted content.
         """
-        transcript_text = input_data.get('transcript_text')
+        transcript_text = input_data.get("transcript_text")
         if not transcript_text:
             raise ValueError("The 'transcript_text' field is required.")
+
+        # Invoke the LangChain model to generate MDX
+        mdx_content = self.chain.invoke({"input": transcript_text})
         
-        return self.convert_to_mdx(transcript_text)
-
-    def convert_to_mdx(self, transcript_text):
-        """Converts the provided transcript text into MDX format and saves it to a file."""
-
-        # Define the message for MDX conversion
-        system_message = {
-            "role": "system",
-            "content": "You are an assistant that converts transcript text into MDX format with headings, bullet points, and JSX where appropriate."
-        }
-        user_message = {
-            "role": "user",
-            "content": f"Transcript: {transcript_text}\n\nConvert this into MDX format."
-        }
-
-        # Create the LangChain prompt with system and user messages
-        prompt = ChatPromptTemplate.from_messages([system_message, user_message])
-
-        # Generate MDX using the LangChain LLM interface
-        mdx_content = self.llm(prompt)
-
-        # Save the MDX content to a file
-        output_file = "transcript.mdx"
-        with open(output_file, "w") as mdx_file:
-            mdx_file.write(mdx_content)
-
-        return output_file
+        return mdx_content
