@@ -1,0 +1,25 @@
+{
+  "nameTag": "chapter_detection_plugin",
+  "title": "Chapter Detection Plugin",
+  "version": "1.0.0",
+  "description": "A plugin that detects chapters in video transcripts using OpenAI's LLM.",
+  "author": {
+    "name": "Your Name",
+    "email": "your.email@example.com",
+    "website": "https://example.com"
+  },
+  "executableFile": "plugin.py",
+  "inputs": {
+    "segments": {
+      "type": "array",
+      "description": "List of transcript segments with timestamps and text.",
+      "required": true
+    }
+  },
+  "outputs": {
+    "chapters_text": {
+      "type": "string",
+      "description": "Chapters detected in YouTube timestamp format."
+    }
+  }
+}

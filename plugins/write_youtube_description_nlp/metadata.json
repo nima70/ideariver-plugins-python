@@ -1,0 +1,25 @@
+{
+  "nameTag": "youtube_description_plugin",
+  "title": "YouTube Description Plugin",
+  "version": "1.0.0",
+  "description": "Generates YouTube video descriptions based on video transcripts using LangChain.",
+  "author": {
+    "name": "Your Name",
+    "email": "your.email@example.com",
+    "website": "https://example.com"
+  },
+  "executableFile": "plugin.py",
+  "inputs": {
+    "transcript": {
+      "type": "string",
+      "description": "Transcript of the video that needs a description.",
+      "required": true
+    }
+  },
+  "outputs": {
+    "description": {
+      "type": "string",
+      "description": "The generated YouTube video description."
+    }
+  }
+}

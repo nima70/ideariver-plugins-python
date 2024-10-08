@@ -4,7 +4,7 @@ Step 1: Create a Virtual Environment (Optional but Recommended)
 
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+venv\Scripts\activate   # On Linux: source venv/bin/activate
 python ffmpeg.py    # to setup ffmpeg
 ```
 

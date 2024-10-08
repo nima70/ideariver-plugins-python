@@ -1,4 +1,4 @@
-from plugin_base import BasePlugin
+from ideariver_core import BasePlugin
 
 class SumPlugin(BasePlugin):
     """

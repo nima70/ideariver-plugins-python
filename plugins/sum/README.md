@@ -1,32 +1,22 @@
 # Sum Plugin
 
-**Version:** 1.0  
-**Author:** [Your Name]
+The **Sum Plugin** is a simple tool designed to calculate the sum of two numbers, `a` and `b`. This plugin is part of the **ideariver-core** plugin system and is perfect for any use case where quick number summation is required.
 
-## Overview
+## Key Features:
+- 🧮 **Simple Addition**: Easily calculate the sum of two numbers.
+- 📦 **Lightweight and Efficient**: Designed to be minimal and fast, providing quick results with minimal overhead.
+- 🔧 **Flexible Inputs**: Accepts inputs in the form of JSON, making it easy to integrate with other tools and services.
 
-The **Sum Plugin** is a simple plugin that accepts a JSON object with two keys, `a` and `b`, and returns the sum of these two values in the form of a JSON response. This plugin can be dynamically loaded, initialized, and executed using the `PluginLoader`.
+## How It Works:
 
-## Features
+1. Input the values for `a` and `b` in the form of a JSON.
+2. The plugin calculates the sum and returns it as JSON.
 
-- Accepts input in JSON format: `{ "a": <int>, "b": <int> }`
-- Returns the sum of `a` and `b` as: `{ "sum": <int> }`
-- Can be integrated into a plugin system with dynamic loading and initialization.
-
-## Installation
-
-1. Ensure that the `sum_plugin.py` file is placed in the `plugins/` folder.
-2. Add the corresponding `plugin_sum_metadata.json` file to the same folder.
-
-### Example `plugin_sum_metadata.json`:
+### Example Usage:
 
 ```json
 {
-  "nameTag": "sum_plugin",
-  "title": "Sum Plugin",
-  "description": "Calculates the sum of two numbers (a and b).",
-  "executableFile": "plugins/sum_plugin.py",
-  "iconURL": "path/to/icon.png",
-  "readme": "plugins/sum_plugin/README.mdx"
+  "a": 5,
+  "b": 7
 }
-```
+  
