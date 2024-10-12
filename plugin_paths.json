@@ -1,0 +1,10 @@
+{
+  "plugin_paths": [
+    "plugins/write_youtube_description_nlp",
+    "plugins/transcribe",
+    "plugins/mdx_converter",
+    "plugins/detect_chapters_nlp",
+    "plugins/sum",
+    "plugins/download_audio_plugin"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "nameTag": "download_audio_plugin",
+  "title": "YouTube Audio Downloader Plugin",
+  "version": "1.0.0",
+  "description": "Downloads audio from a YouTube video.",
+  "author": {
+    "name": "Your Name",
+    "email": "your.email@example.com",
+    "website": "https://example.com"
+  },
+  "executableFile": "main.py",
+  "iconURL": "path/to/icon.png",
+  "documentation": {
+    "readme": "plugins/download_audio/README.mdx",
+    "helpURL": "https://example.com/download_audio_plugin/help"
+  },
+  "inputs": {
+    "video_id": {
+      "type": "string",
+      "required": true,
+      "description": "The YouTube video ID to download audio from."
+    },
+    "output_dir": {
+      "type": "string",
+      "required": false,
+      "description": "Optional. The directory where the audio file will be saved. Defaults to /tmp or ~/tmp."
+    }
+  },
+  "outputs": {
+    "absolute_path": {
+      "type": "string",
+      "description": "The absolute path to the downloaded audio file."
+    }
+  },
+  "errorCodes": {
+    "INVALID_VIDEO_ID": {
+      "code": 2001,
+      "message": "The provided video ID is invalid.",
+      "solution": "Ensure that the video ID is correct and the video is accessible."
+    },
+    "DOWNLOAD_ERROR": {
+      "code": 2002,
+      "message": "An error occurred during the download process.",
+      "solution": "Check the provided video ID and output directory."
+    }
+  },
+  "test_info": [
+    {
+      "test_file": "test.py",
+      "test_function": "test_download_audio"
+    }
+  ],
+  "dependencies": {
+    "python": ">=3.8",
+    "requiredLibraries": ["yt-dlp"]
+  }
+}

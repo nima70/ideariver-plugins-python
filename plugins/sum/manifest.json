@@ -1,0 +1,68 @@
+{
+  "nameTag": "sum_plugin",
+  "title": "Sum Plugin",
+  "version": "1.1.0",
+  "description": "A plugin to calculate the sum of two numbers (a and b) with error handling and range validation.",
+  "author": {
+    "name": "Your Name",
+    "email": "your.email@example.com",
+    "website": "https://example.com"
+  },
+  "executableFile": "main.py",
+  "iconURL": "assets/icons/sum_icon.png",
+  "documentation": {
+    "readme": "README.mdx",
+    "helpURL": "https://example.com/sum_plugin/help"
+  },
+  "inputs": {
+    "a": {
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "required": true,
+      "description": "First operand for the sum, must be between 0 and 100."
+    },
+    "b": {
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "required": true,
+      "description": "Second operand for the sum, must be between 0 and 100."
+    }
+  },
+  "outputs": {
+    "sum": {
+      "type": "number",
+      "description": "The result of adding 'a' and 'b'."
+    }
+  },
+  "errorCodes": {
+    "INVALID_INPUT": {
+      "code": 1001,
+      "message": "The provided input is invalid or out of range.",
+      "solution": "Ensure both 'a' and 'b' are numbers within the range of 0 to 100."
+    },
+    "MISSING_INPUT": {
+      "code": 1002,
+      "message": "A required input is missing.",
+      "solution": "Provide valid values for both 'a' and 'b'."
+    },
+    "UNKNOWN_ERROR": {
+      "code": 1003,
+      "message": "An unknown error occurred during calculation.",
+      "solution": "Check the input values and retry. If the issue persists, refer to the documentation."
+    }
+  },
+  "test_info": [
+    {
+      "test_file": "test.py",
+      "test_function": "test_sum_plugin"
+    }
+  ],
+  "dependencies": {
+    "python": ">=3.8",
+    "requiredLibraries": ["numpy>=1.21.0", "scipy>=1.7.0"]
+  }
+}
